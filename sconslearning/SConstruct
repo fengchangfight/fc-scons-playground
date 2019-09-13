@@ -1,2 +1,2 @@
 Program(target = 'addmain', source = ['Hello.cpp','add.cpp'])
-
+Program(target = 'anotheradd', source = ['AnotherAdd.cpp', 'add.cpp'])
