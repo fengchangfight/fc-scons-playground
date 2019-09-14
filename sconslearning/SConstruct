@@ -4,4 +4,9 @@ sourcelist2 = ['AnotherAdd.cpp'] + common
 #Program(target = 'calc', source = sourcelist1)
 #Program(target = 'AnotherCalc', source = sourcelist2)
 #SharedLibrary('add', 'add.cpp')
-Program(target = 'AddTest', source = ['add_test.cpp'], LIBS=['add'], LIBPATH='.')
+#Program(target = 'AddTest', source = ['add_test.cpp'], LIBS=['add'], LIBPATH='.')
+
+
+env = Environment()
+hello = env.Program(source = sourcelist1)
+env.Install('/Users/xiefengchang/test/s/bench/selfmadecpptutorial/sconslearning/build', hello)
