@@ -1,7 +1,7 @@
 common = ['add.cpp', 'minus.cpp']
 sourcelist1 = ['Hello.cpp'] + common
 sourcelist2 = ['AnotherAdd.cpp'] + common
-Program(target = 'calc', source = sourcelist1)
-Program(target = 'AnotherCalc', source = sourcelist2)
-
-SharedLibrary('add', 'add.cpp')
+#Program(target = 'calc', source = sourcelist1)
+#Program(target = 'AnotherCalc', source = sourcelist2)
+#SharedLibrary('add', 'add.cpp')
+Program(target = 'AddTest', source = ['add_test.cpp'], LIBS=['add'], LIBPATH='.')
