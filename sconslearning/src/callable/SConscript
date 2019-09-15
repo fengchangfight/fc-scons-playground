@@ -1,0 +1,4 @@
+sourcelist = ['callable_main.cpp']
+
+env = Environment()
+cm = env.Program(source = sourcelist)
