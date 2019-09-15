@@ -27,28 +27,41 @@ public:
     unsigned long long _acm;
 };
 
-int main()
+void prepareFakeData(std::vector<int> &v)
 {
-    std::cout << "here i am multithreading...\n";
-    std::vector<int> v;
-
     int size = 10;
     for (int i = 0; i < size; i++)
     {
         v.push_back(i + 1);
     }
+}
 
-    CAccumulatorFunctor3 accumulator1 = CAccumulatorFunctor3();
-    CAccumulatorFunctor3 accumulator2 = CAccumulatorFunctor3();
-    std::thread t1(std::ref(accumulator1),
-                   std::ref(v), 0, v.size() / 2);
-    std::thread t2(std::ref(accumulator2),
-                   std::ref(v), v.size() / 2, v.size());
+int main()
+{
+    std::cout << "here i am multithreading...\n";
+    std::vector<int> v;
+    prepareFakeData(v);
+
+    unsigned long long acm1 = 0;
+    unsigned long long acm2 = 0;
+    std::thread t1([&acm1, &v] {
+        for (unsigned int i = 0; i < v.size() / 2; ++i)
+        {
+            acm1 += v[i];
+        }
+    });
+    std::thread t2([&acm2, &v] {
+        for (unsigned int i = v.size() / 2; i < v.size(); ++i)
+        {
+            acm2 += v[i];
+        }
+    });
     t1.join();
     t2.join();
 
-    std::cout << "acm1: " << accumulator1._acm << std::endl;
-    std::cout << "acm2: " << accumulator2._acm << std::endl;
-    std::cout << "accumulator1._acm + accumulator2._acm : " << accumulator1._acm + accumulator2._acm << std::endl;
+    std::cout << "acm1: " << acm1 << std::endl;
+    std::cout << "acm2: " << acm2 << std::endl;
+    std::cout << "acm1 + acm2: " << acm1 + acm2 << std::endl;
+
     return 0;
 }
