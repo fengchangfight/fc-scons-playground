@@ -1,0 +1,4 @@
+sourcelist = ['mtmain.cpp']
+
+env = Environment()
+mt = env.Program(source = sourcelist)

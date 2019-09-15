@@ -8,3 +8,5 @@ sourcelist2 = ['AnotherAdd.cpp'] + common
 
 env = Environment()
 hello = env.Program(source = sourcelist1)
+
+SConscript('multithreading/SConscript')
