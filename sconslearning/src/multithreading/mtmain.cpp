@@ -12,6 +12,12 @@ void accumulator_function2(const std::vector<int> &v, unsigned long long &acm,
     }
 }
 
+int getMaximumNumberOfThreads()
+{
+    unsigned int c = std::thread::hardware_concurrency();
+    return c;
+}
+
 class CAccumulatorFunctor3
 {
 public:
@@ -42,26 +48,8 @@ int main()
     std::vector<int> v;
     prepareFakeData(v);
 
-    unsigned long long acm1 = 0;
-    unsigned long long acm2 = 0;
-    std::thread t1([&acm1, &v] {
-        for (unsigned int i = 0; i < v.size() / 2; ++i)
-        {
-            acm1 += v[i];
-        }
-    });
-    std::thread t2([&acm2, &v] {
-        for (unsigned int i = v.size() / 2; i < v.size(); ++i)
-        {
-            acm2 += v[i];
-        }
-    });
-    t1.join();
-    t2.join();
+    int c = getMaximumNumberOfThreads();
 
-    std::cout << "acm1: " << acm1 << std::endl;
-    std::cout << "acm2: " << acm2 << std::endl;
-    std::cout << "acm1 + acm2: " << acm1 + acm2 << std::endl;
-
+    std::cout << "Number of cores:" << c << std::endl;
     return 0;
 }
